@@ -3,14 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    baseUrl: 'http://localhost',
-    baseAPIUrl: 'http://localhost:8000/api/v1/',
+    production: true,
+    baseUrl: '',
+    baseAPIUrl: '',
     githubAuth: {
         URL: 'https://github.com/login/oauth/authorize',
-        CLIENT_ID: 'Iv1.54319c9b16b131e3',
-        CLIENT_DOMAIN: 'github-trading.eu.auth0.com',
-        REDIRECT_URI: 'http://localhost:4200/callback',
+        CLIENT_ID: '',
+        CLIENT_DOMAIN: '',
+        REDIRECT_URI: '',
         SCOPE: 'user user:email repo'
     },
     localStorageJWT: 'git-trading-jwt'

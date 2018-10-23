@@ -3,7 +3,7 @@ import { environment as defaultEnvironment } from './environment';
 export const environmentLoader = new Promise<any>((resolve, reject) => {
     var xmlhttp = new XMLHttpRequest(),
         method = 'GET',
-        url = './assets/environments/environment.json';
+        url = './assets/environments/environment.json?date=' + new Date().getTime();
     xmlhttp.open(method, url, true);
     xmlhttp.onload = function () {
         if (xmlhttp.status === 200) {
