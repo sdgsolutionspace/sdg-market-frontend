@@ -3,5 +3,6 @@ export interface GitProject {
     name: string,
     git_address: string,
     project_address?: string,
-    active: boolean
+    active: boolean,
+    own_value?: number
 }

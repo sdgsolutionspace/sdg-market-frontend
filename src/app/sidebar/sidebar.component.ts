@@ -12,7 +12,7 @@ export class SidebarComponent implements OnInit {
 
   public currentUser: User;
 
-  constructor(private authGuard: AuthGuard, private authService: AuthService) { }
+  constructor(public authGuard: AuthGuard, public authService: AuthService) { }
 
   ngOnInit() {
     this.currentUser = localStorage.getItem("CURRENT_USER") ? JSON.parse(localStorage.getItem("CURRENT_USER")) : null;

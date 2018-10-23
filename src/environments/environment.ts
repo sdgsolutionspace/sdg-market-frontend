@@ -6,8 +6,6 @@ export const environment = {
     production: false,
     baseUrl: 'http://localhost:8000',
     baseAPIUrl: 'http://localhost:8000/api/v1/',
-    // baseUrl: 'http://github-trading.local',
-    // baseAPIUrl: 'http://github-trading.local/api/v1/',
     githubAuth: {
         URL: 'https://github.com/login/oauth/authorize',
         CLIENT_ID: 'Iv1.54319c9b16b131e3',

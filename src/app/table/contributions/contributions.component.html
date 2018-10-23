@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>Date</th>
-      <th *ngIf="!project">Project</th>
+      <th *ngIf="!currentProject">Project</th>
       <th>Commit</th>
       <th>Value</th>
     </tr>
@@ -13,7 +13,7 @@
         {{ contribution.calculation_utc_datetime }}
       </td>
 
-      <td *ngIf="!project">
+      <td *ngIf="!currentProject">
         {{ contribution.git_project.name }}
       </td>
       <td>

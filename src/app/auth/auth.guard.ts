@@ -46,7 +46,7 @@ export class AuthGuard implements CanActivate {
      * If no role add then its simple user, or else check if user has this role in his ROLE array from API response
      * @param role
      */
-    private hasTheRole(user, role): boolean {
+    public hasTheRole(user, role): boolean {
         if (!user) {
             return false;
         }

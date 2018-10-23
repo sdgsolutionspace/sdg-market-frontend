@@ -1,0 +1,13 @@
+{
+    "production": true,
+    "baseUrl": "",
+    "baseAPIUrl": "",
+    "githubAuth": {
+        "URL": "",
+        "CLIENT_ID": "",
+        "CLIENT_DOMAIN": "",
+        "REDIRECT_URI": "",
+        "SCOPE": "user user:email repo"
+    },
+    "localStorageJWT": "git-trading-jwt"
+}

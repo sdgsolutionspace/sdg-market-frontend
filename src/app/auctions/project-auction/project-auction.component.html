@@ -303,7 +303,7 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="number-of-tokens-to-sell" placeholder="Tokens" min="1"
-                        step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': submitted && sellForm.get('number_of_tokens').errors }">
+                        step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('number_of_tokens').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -322,7 +322,7 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1" step="1"
-                        formControlName="sell_price_per_token" [ngClass]="{ 'is-invalid': submitted && sellForm.get('sell_price_per_token').errors }">
+                        formControlName="sell_price_per_token" [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('sell_price_per_token').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-money-bill"></i>
@@ -366,7 +366,7 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="number-of-tokens-to-purchase" placeholder="Tokens"
-                        min="1" step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': submitted && purchaseOfferForm.get('number_of_tokens').errors }">
+                        min="1" step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('number_of_tokens').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -385,7 +385,7 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1" step="1"
-                        formControlName="purchase_price_per_token" [ngClass]="{ 'is-invalid': submitted && purchaseOfferForm.get('purchase_price_per_token').errors }">
+                        formControlName="purchase_price_per_token" [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('purchase_price_per_token').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-money-bill"></i>
