@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     verifyCodeAndState(code, state): Observable<any> {
-        const url = this.environment.baseUrl + '/connect/github/check';
+        const url = this.environment.baseAPIUrl + '/connect/github/check';
         return this.http.get(`${url}?code=${code}&state=${state}`);
     }
 
