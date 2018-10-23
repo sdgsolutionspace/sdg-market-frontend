@@ -45,6 +45,6 @@ RUN cp -a /tmp/build/dist/github-trading/* /var/www/html && rm -rf /tmp/build
 EXPOSE 80
 
 ## Prepare the proper init script
-COPY docker/init_entry.sh /init_entry.sh
+COPY init_entry.sh /init_entry.sh
 RUN chmod +x /init_entry.sh
 ENTRYPOINT [ "/init_entry.sh" ]
