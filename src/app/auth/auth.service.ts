@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from "../services/api/user.service";
@@ -9,31 +8,33 @@ import { User } from '../interfaces/user';
 @Injectable()
 export class AuthService {
     public authenticationEvent: EventEmitter<User> = new EventEmitter();
+    private environment;
     constructor(private router: Router, private http: HttpClient, private userService: UserService) {
         this.refreshUser();
+        this.environment = JSON.parse(localStorage.getItem("APP_SETTINGS"));
     }
 
     login() {
-        let url = `${environment.githubAuth.URL}?scope=${environment.githubAuth.SCOPE}`;
+        let url = `${this.environment.githubAuth.URL}?scope=${this.environment.githubAuth.SCOPE}`;
         url += `&state=${this.generateRandomState()}&response_type=code&approval_prompt=auto`;
-        url += `&redirect_uri=${environment.githubAuth.REDIRECT_URI}&client_id=${environment.githubAuth.CLIENT_ID}`;
+        url += `&redirect_uri=${this.environment.githubAuth.REDIRECT_URI}&client_id=${this.environment.githubAuth.CLIENT_ID}`;
 
         window.location.href = url;
     }
 
     verifyCodeAndState(code, state): Observable<any> {
-        const url = environment.baseUrl + '/connect/github/check';
+        const url = this.environment.baseUrl + '/connect/github/check';
         return this.http.get(`${url}?code=${code}&state=${state}`);
     }
 
     logout() {
-        localStorage.removeItem(environment.localStorageJWT);
+        localStorage.removeItem(this.environment.localStorageJWT);
         localStorage.removeItem("CURRENT_USER");
         this.authenticationEvent.emit(null);
     }
 
     logInUser(response) {
-        localStorage.setItem(environment.localStorageJWT, response.token);
+        localStorage.setItem(this.environment.localStorageJWT, response.token);
         this.refreshUser();
     }
 

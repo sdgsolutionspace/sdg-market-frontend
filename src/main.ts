@@ -3,17 +3,19 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { environmentLoader } from './environments/environment-loader';
+import { environmentLoader as environmentLoaderPromise } from './environments/environment-loader';
 
-// import { environmentLoader as environmentLoaderPromise } from './environments/environment-loader';
-environmentLoader.then(env => {
+environmentLoaderPromise.then(env => {
   if (env.production) {
     enableProdMode();
   }
+
+  environment.production = env.production;
   environment.baseUrl = env.baseUrl;
   environment.baseAPIUrl = env.baseAPIUrl;
   environment.githubAuth = env.githubAuth;
   environment.localStorageJWT = env.localStorageJWT;
+  localStorage.setItem("APP_SETTINGS", JSON.stringify(environment));
 
   platformBrowserDynamic().bootstrapModule(AppModule);
 });
