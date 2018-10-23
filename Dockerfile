@@ -5,8 +5,11 @@ WORKDIR /var/www/html
 ENV PHP_VER 7.2
 
 ## Defaults values for the config
-ENV BASE_URL=http://localhost
-ENV BASE_API_URL=http://localhost:8000/api
+ENV BASE_URL=http://localhost:8000
+ENV BASE_API_URL=http://localhost:8000/api/v1
+ENV GITHUB_URL=https://github.com/login/oauth/authorize
+ENV GITHUB_CLIENT_ID=
+ENV GITHUB_REDIRECT_URI=http://localhost/callback
 
 ## Non interactive Debian package installation
 ENV DEBIAN_FRONTEND noninteractive
@@ -41,8 +44,9 @@ RUN cd /tmp/build && node_modules/.bin/ng build #--prod
 ## Finally keep only static files and cleanup
 RUN cp -a /tmp/build/dist/github-trading/* /var/www/html && rm -rf /tmp/build
 
-## Define the port used by Apache
+## Define the port used by Nginx and fix config for Angular
 EXPOSE 80
+RUN sed -i 's/try_files.*/try_files $uri /index.html;' /etc/nginx/sites-enabled/default
 
 ## Prepare the proper init script
 COPY init_entry.sh /init_entry.sh
