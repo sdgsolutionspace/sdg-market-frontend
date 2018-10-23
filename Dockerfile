@@ -5,8 +5,11 @@ WORKDIR /var/www/html
 ENV PHP_VER 7.2
 
 ## Defaults values for the config
-ENV BASE_URL=http://localhost
-ENV BASE_API_URL=http://localhost:8000/api
+ENV BASE_URL=http://localhost:8000
+ENV BASE_API_URL=http://localhost:8000/api/v1
+ENV GITHUB_URL=https://github.com/login/oauth/authorize
+ENV GITHUB_CLIENT_ID=
+ENV GITHUB_REDIRECT_URI=http://localhost/callback
 
 ## Non interactive Debian package installation
 ENV DEBIAN_FRONTEND noninteractive
