@@ -155,7 +155,6 @@ export class ProjectAuctionComponent implements OnInit {
         this.sellModalCloseButton.nativeElement.click();
         this.closeBuyModalForm();
         this.refreshSellOffer();
-        console.log("success", data);
         this.toastr.success("Your transaction is complete", "Transaction complete");
       }).catch(error => {
         console.log(error);

@@ -7,5 +7,6 @@ export interface SellOffer {
     offer_starts_utc_date: string,
     offer_expires_at_utc_date: string,
     project: string,
-    seller: User
+    seller: User,
+    remaining_tokens: number
 };
