@@ -3,6 +3,7 @@
 pushd /var/www/html
 
 env_file=assets/environments/environment.json
+mv assets/environments/environment.dist.json assets/environments/environment.json
 ## Replace all variable in config file
 sed -i "s|\"baseUrl.*|\"baseUrl\": \"${BASE_URL}\",|g" ${env_file}
 sed -i "s|\"baseAPIUrl.*|\"baseAPIUrl\": \"${BASE_API_URL}\",|g" ${env_file}
