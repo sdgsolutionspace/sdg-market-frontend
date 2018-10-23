@@ -65,7 +65,7 @@
                   <th>User</th>
                   <th>Token offered</th>
                   <th>Date</th>
-                  <th>Price/token</th>
+                  <th>Price (sdg)/token</th>
                   <th>Expire</th>
                   <th class="actions">Action</th>
                 </tr>
@@ -87,13 +87,16 @@
                     {{ sale.offer_starts_utc_date }}
                   </td>
                   <td>
-                    {{ sale.sell_price_per_token }} <i class="fas fa-fw fa-coins"></i>
+                    <span class="badge badge-warning">
+                      <i class="fas fa-fw fa-money-bill"></i>
+                      {{ sale.sell_price_per_token | number : "1.2-4" }} SDG
+                    </span>
                   </td>
                   <td>
                     {{ sale.offer_expires_at_utc_date }}
                   </td>
                   <td class="actions">
-                    <a class="btn btn-dark" data-toggle="modal" data-target="#buy-modal" aria-controls="buy-modal">
+                    <a class="btn btn-dark" data-toggle="modal" (click)="buyTokens(buyModalForm, sale)" aria-controls="buy-modal">
                       <i class="fas fa-fw fa-shopping-cart"></i> Buy
                     </a>
                   </td>
@@ -224,17 +227,17 @@
       </div>
 
       <!-- Buy modal -->
-      <div class="modal fade" id="buy-modal" tabindex="-1" role="dialog" aria-labelledby="buy-modal-title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+      <ng-template #buyModalForm>
+        <div class="" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="buy-modal-title">Buy tokens</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeBuyModalForm()">
                 <span aria-hidden="true"><i class="fas fa-fw fa-times"></i></span>
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form (ngSubmit)="submitBuyingForm()" [formGroup]="buyForm">
                 <div class="form-group row">
                   <label class="col-sm-7" for="number-of-tokens">
                     Number of tokens
@@ -242,14 +245,14 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="number-of-tokens" placeholder="Tokens" min="1" step="1"
-                        required>
+                        formControlName="nb_tokens">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
                         </span>
                       </div>
                     </div>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" *ngIf="buyForm.get('nb_tokens').errors">
                       Please provide the number of tokens to buy.
                     </div>
                   </div>
@@ -278,7 +281,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
 
       <!-- New offer modal -->
       <div class="modal fade" id="new-offer-modal" tabindex="-1" role="dialog" aria-labelledby="new-offer-modal-title"

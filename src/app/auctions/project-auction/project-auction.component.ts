@@ -9,6 +9,8 @@ import { PurchaseOffer } from 'src/app/interfaces/purchase-offer';
 import { Contribution } from 'src/app/interfaces/contribution';
 import { GitProject } from 'src/app/interfaces/git-project';
 import { GitProjectApiService } from 'src/app/services/api/git-project-api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-project-auction',
@@ -21,9 +23,12 @@ export class ProjectAuctionComponent implements OnInit {
   selectedTab = 1;
   public sellForm: FormGroup;
   public purchaseOfferForm: FormGroup;
+  public buyForm: FormGroup;
+
   public projectId: number;
   public sellFormSubmitted = false;
   public purchaseOfferFormSubmitted = false;
+  public buyFormSumitted = false;
   public currentSales: Array<SellOffer> = null;
   public currentPurchaseOffers: Array<PurchaseOffer> = null;
   public currentContributions: Array<Contribution>;
@@ -34,7 +39,8 @@ export class ProjectAuctionComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private sellOfferApi: ApiSellOfferService,
     private purchaseOfferApi: ApiPurchaseOfferService, public toastr: ToastrService, public router: Router,
-    private projecApi: GitProjectApiService) {
+    private projecApi: GitProjectApiService, private sellApi: ApiSellOfferService, private modalService: NgbModal,
+    private authService: AuthService) {
   }
 
   private generateSellingForm() {
@@ -47,6 +53,19 @@ export class ProjectAuctionComponent implements OnInit {
         Validators.required
       ]],
       project: [this.projectId, [
+        Validators.required
+      ]]
+    });
+  }
+
+  private generateBuyForm(sellForm: number) {
+
+    this.buyFormSumitted = false;
+    this.buyForm = this.fb.group({
+      nb_tokens: [0, [
+        Validators.required
+      ]],
+      sell_offer: [sellForm, [
         Validators.required
       ]]
     });
@@ -68,8 +87,6 @@ export class ProjectAuctionComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
     this.projectId = this.route.snapshot.params["id"];
 
@@ -90,6 +107,16 @@ export class ProjectAuctionComponent implements OnInit {
       this.currentSales = sales;
       console.log("Selling offers", sales);
     });
+  }
+
+  public buyTokens(modalForm, sellOffer: SellOffer) {
+    console.log("Offer selected", sellOffer, modalForm);
+    this.modalService.open(modalForm);
+    this.generateBuyForm(sellOffer.id);
+  }
+
+  public closeBuyModalForm() {
+    this.modalService.dismissAll();
   }
 
   public refreshPurchasesOffer() {
@@ -116,6 +143,27 @@ export class ProjectAuctionComponent implements OnInit {
       });
     }
   }
+
+
+  public submitBuyingForm() {
+    const formValue = this.buyForm.value;
+
+    this.buyFormSumitted = true;
+    if (this.buyForm.valid) {
+      this.sellApi.buy(formValue).toPromise().then((data) => {
+        this.authService.refreshUser();
+        this.sellModalCloseButton.nativeElement.click();
+        this.closeBuyModalForm();
+        this.refreshSellOffer();
+        console.log("success", data);
+        this.toastr.success("Your transaction is complete", "Transaction complete");
+      }).catch(error => {
+        console.log(error);
+        this.toastr.error("An error occurred while saving your data", error);
+      });
+    }
+  }
+
 
   public submitPurchaseOfferForm() {
     const formValue = this.purchaseOfferForm.value;

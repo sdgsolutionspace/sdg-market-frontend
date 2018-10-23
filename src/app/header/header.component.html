@@ -16,6 +16,15 @@
               <a class="nav-link" [routerLink]="['/logout']" *ngIf="currentUser">Log out [{{ currentUser.username }}]</a>
               <a class="nav-link" [routerLink]="['/login']" *ngIf="!currentUser">Login</a>
             </li>
+            <li class="nav-item" *ngIf="currentUser">
+              <a href="javascript:;" class="nav-link">
+                <span class="badge badge-warning">
+                  <i class="fas fa-fw fa-money-bill"></i>
+                  {{ (currentUser.sold_sdg || 0) | number : "1.2-3" }} SDG
+                </span>
+              </a>
+
+            </li>
           </ul>
         </div>
       </nav>

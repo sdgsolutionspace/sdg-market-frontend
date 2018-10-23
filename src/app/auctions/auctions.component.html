@@ -25,13 +25,13 @@
                 {{ project[0].name }}
               </td>
               <td>
-                {{ (project[0].project_value|| 0) |number: "1.2-2"}} <i class="fas fa-fw fa-coins"></i>
+                {{ (project[0].project_value || 0) |number: "1.2-2"}} <i class="fas fa-fw fa-coins"></i>
               </td>
               <td>
-                {{ (project.my_contribution|| 0) |number: "1.2-2"}} <i class="fas fa-fw fa-coins"></i>
+                {{ (project.my_contribution || 0) |number: "1.2-2"}} <i class="fas fa-fw fa-coins"></i>
               </td>
               <td class="actions">
-                <a [routerLink]="['/auctions/project', project.id]" class="btn btn-sm btn-warning">
+                <a [routerLink]="['/auctions/project', project[0].id]" class="btn btn-sm btn-warning">
                   <i class="fas fa-fw fa-eye"></i> View
                 </a>
               </td>

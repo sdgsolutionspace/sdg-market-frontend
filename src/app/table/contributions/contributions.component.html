@@ -22,7 +22,8 @@
         </a>
       </td>
       <td>
-        {{ contribution.number_of_tokens }} <i class="fas fa-fw fa-coins"></i>
+        <i class="fas fa-fw fa-coins"></i>
+        {{ contribution.transaction.nb_tokens }}
       </td>
     </tr>
   </tbody>
@@ -32,7 +33,8 @@
         Total
       </th>
       <th>
-        {{ contributionsSum() }} <i class="fas fa-fw fa-coins"></i>
+        <i class="fas fa-fw fa-coins"></i>
+        {{ (contributionsSum() || 0) |number : '1.2-4' }}
       </th>
     </tr>
   </tfoot>

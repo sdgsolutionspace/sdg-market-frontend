@@ -24,6 +24,10 @@ export class ApiSellOfferService {
     return this.backendApi.update(`sell-offers/${id}`, data);
   }
 
+  public buy(data): Observable<SellOffer> {
+    return this.backendApi.update(`sell-offers/${data.sell_offer}/buy`, data);
+  }
+
   public create(data: SellOffer): Observable<SellOffer> {
     return this.backendApi.post(`sell-offers`, data);
   }

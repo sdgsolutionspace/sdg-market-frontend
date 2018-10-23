@@ -10,6 +10,7 @@ import { User } from '../interfaces/user';
 export class AuthService {
     public authenticationEvent: EventEmitter<User> = new EventEmitter();
     constructor(private router: Router, private http: HttpClient, private userService: UserService) {
+        this.refreshUser();
     }
 
     login() {
@@ -33,9 +34,13 @@ export class AuthService {
 
     logInUser(response) {
         localStorage.setItem(environment.localStorageJWT, response.token);
+        this.refreshUser();
+    }
+
+    refreshUser() {
+        console.log("refreshing user");
         this.userService.getMe().toPromise().then(user => {
             this.authenticationEvent.emit(user);
-            console.log("LOGINNNN", user);
             if (user) {
                 localStorage.setItem("CURRENT_USER", JSON.stringify(user));
             } else {
@@ -44,8 +49,7 @@ export class AuthService {
 
         }).catch(err => {
             console.log("authentication error");
-        })
-
+        });
     }
 
     generateRandomState() {
