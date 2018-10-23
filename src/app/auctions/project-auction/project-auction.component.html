@@ -237,7 +237,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form (ngSubmit)="submitBuyingForm()" [formGroup]="buyForm">
+              <form (ngSubmit)="submitBuyingForm()" [formGroup]="buyForm" [ngClass]="{'submitted': buyFormSumitted}">
                 <div class="form-group row">
                   <label class="col-sm-7" for="number-of-tokens">
                     Number of tokens
@@ -245,7 +245,7 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="number-of-tokens" placeholder="Tokens" min="1" step="1"
-                        formControlName="nb_tokens">
+                        formControlName="nb_tokens" (input)="onNbOfTokensToBuyChange($event.target.value, totalPrice)">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -253,7 +253,7 @@
                       </div>
                     </div>
                     <div class="invalid-feedback" *ngIf="buyForm.get('nb_tokens').errors">
-                      Please provide the number of tokens to buy.
+                      {{ buyForm.get('nb_tokens').errors.nbTokens }}
                     </div>
                   </div>
                 </div>
@@ -263,7 +263,8 @@
                   </label>
                   <div class="col-sm-5">
                     <div class="input-group">
-                      <input type="text" class="form-control" id="value-of-tokens" placeholder="Total" disabled>
+                      <input type="text" class="form-control" id="value-of-tokens" placeholder="Total" #totalPrice
+                        disabled>
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-money-bill"></i>

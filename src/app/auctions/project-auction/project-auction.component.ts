@@ -29,6 +29,8 @@ export class ProjectAuctionComponent implements OnInit {
   public sellFormSubmitted = false;
   public purchaseOfferFormSubmitted = false;
   public buyFormSumitted = false;
+  public currentSellFormBuying: SellOffer;
+
   public currentSales: Array<SellOffer> = null;
   public currentPurchaseOffers: Array<PurchaseOffer> = null;
   public currentContributions: Array<Contribution>;
@@ -112,6 +114,7 @@ export class ProjectAuctionComponent implements OnInit {
   public buyTokens(modalForm, sellOffer: SellOffer) {
     console.log("Offer selected", sellOffer, modalForm);
     this.modalService.open(modalForm);
+    this.currentSellFormBuying = sellOffer;
     this.generateBuyForm(sellOffer.id);
   }
 
@@ -124,6 +127,11 @@ export class ProjectAuctionComponent implements OnInit {
       this.currentPurchaseOffers = purchasesOffer;
       console.log("Purchases offers", purchasesOffer);
     });
+  }
+
+  public onNbOfTokensToBuyChange(nbOfTokens: number, totalPriceField: HTMLInputElement) {
+    let totalPrice = nbOfTokens * parseFloat(this.currentSellFormBuying.sell_price_per_token);
+    totalPriceField.value = totalPrice.toFixed(2);
   }
 
   public submitSellForm() {
@@ -159,6 +167,14 @@ export class ProjectAuctionComponent implements OnInit {
       }).catch(error => {
         console.log(error);
         this.toastr.error("An error occurred while saving your data", error);
+        console.log("ERROR", error.error.errors.children);
+        if (error.error && error.error.errors && error.error.errors.children && error.error.errors.children.nbTokens.errors) {
+          console.log("there is an error");
+          this.buyForm.get("nb_tokens").setErrors({
+            "nbTokens": error.error.errors.children.nbTokens.errors.join("<br>")
+          });
+        }
+
       });
     }
   }
