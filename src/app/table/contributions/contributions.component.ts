@@ -36,7 +36,9 @@ export class ContributionsComponent implements OnInit {
 
   public contributionsSum() {
     if (this.currentContributions) {
-      return this.currentContributions.reduce(function (x, contribution) { return x + contribution.number_of_tokens }, 0);
+      return this.currentContributions.reduce(function (x, contribution) {
+        return x + contribution.transaction.nb_tokens
+      }, 0);
     }
     return 0;
   }

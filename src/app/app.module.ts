@@ -24,6 +24,7 @@ import { ContributionsComponent } from './table/contributions/contributions.comp
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
+import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -51,7 +52,8 @@ import { LogoutComponent } from './logout/logout.component';
         ReactiveFormsModule,
         FormsModule,
         ToastrModule.forRoot(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        NgbModule
     ],
     providers: [
         AuthService

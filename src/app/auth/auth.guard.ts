@@ -47,7 +47,6 @@ export class AuthGuard implements CanActivate {
      * @param role
      */
     private hasTheRole(user, role): boolean {
-        console.log("TEST ROLE", user, role);
         if (!user) {
             return false;
         }
