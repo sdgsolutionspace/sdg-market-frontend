@@ -44,8 +44,9 @@ RUN cd /tmp/build && node_modules/.bin/ng build #--prod
 ## Finally keep only static files and cleanup
 RUN cp -a /tmp/build/dist/github-trading/* /var/www/html && rm -rf /tmp/build
 
-## Define the port used by Apache
+## Define the port used by Nginx and fix config for Angular
 EXPOSE 80
+RUN sed -i 's/try_files.*/try_files $uri /index.html;' /etc/nginx/sites-enabled/default
 
 ## Prepare the proper init script
 COPY init_entry.sh /init_entry.sh
