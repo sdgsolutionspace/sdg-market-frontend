@@ -36,7 +36,7 @@ COPY . /tmp/build
 RUN cd /tmp/build && npm install
 
 ## Build with Angular
-RUN cd /tmp/build && /tmp/build/node_modules/.bin/ng build #--prod
+RUN cd /tmp/build && node_modules/.bin/ng build #--prod
 
 ## Finally keep only static files and cleanup
 RUN cp -a /tmp/build/dist/github-trading/* /var/www/html && rm -rf /tmp/build
@@ -45,6 +45,6 @@ RUN cp -a /tmp/build/dist/github-trading/* /var/www/html && rm -rf /tmp/build
 EXPOSE 80
 
 ## Prepare the proper init script
-COPY docker/init_entry.sh /init_entry.sh
+COPY init_entry.sh /init_entry.sh
 RUN chmod +x /init_entry.sh
 ENTRYPOINT [ "/init_entry.sh" ]
