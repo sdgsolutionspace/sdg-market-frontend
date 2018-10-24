@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-callback',
@@ -8,11 +8,12 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./callback.component.scss']
 })
 export class CallbackComponent implements OnInit {
-
+    public error: string;
     constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) {
     }
 
     ngOnInit() {
+        let self = this;
         const code: string = this.route.snapshot.queryParamMap.get('code');
         const state: string = this.route.snapshot.queryParamMap.get('state');
         this.auth.verifyCodeAndState(code, state)
@@ -23,8 +24,19 @@ export class CallbackComponent implements OnInit {
                 },
                 error => {
                     // TODO: Better error handling
-                    alert('Github Auth Error!');
+
+                    if (error.error && error.error.error_description) {
+                        self.error = error.error.error_description;
+                    }
+
+                    if (error.error && error.error.message) {
+                        self.error = error.error.message;
+                    }
                 });
+    }
+
+    connectGitHub() {
+        this.auth.login();
     }
 
 }

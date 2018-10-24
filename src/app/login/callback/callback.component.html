@@ -1,3 +1,23 @@
-<p>
-  Loading...
-</p>
+<main class="container page-main-content">
+  <div class="row align-items-center">
+    <div class="col col-md-8 offset-md-2">
+
+      <div class="jumbotron" *ngIf="!error">
+
+        <h1 class="title">Login with your Github account</h1>
+        <p>Please wait while we are negociating with your Github account</p>
+
+      </div>
+
+      <div class="jumbotron" *ngIf="error">
+        <h1 class="title">Login with your Github account</h1>
+        <div class="alert alert-danger">
+          <strong>Error during authentication!</strong>
+          {{ error }}
+        </div>
+        <button class="btn btn-block btn-default" (click)="connectGitHub()"><i class="fab fa-github"></i> Click to
+          try again!</button>
+      </div>
+    </div>
+  </div>
+</main>
