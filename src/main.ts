@@ -8,9 +8,6 @@ import { environmentLoader as environmentLoaderPromise } from './environments/en
 environmentLoaderPromise.then(env => {
   if (env.production) {
     enableProdMode();
-    if (window) {
-      window.console.log = function () { };
-    }
   }
 
   environment.production = env.production;
