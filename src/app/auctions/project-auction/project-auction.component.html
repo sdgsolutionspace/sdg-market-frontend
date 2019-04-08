@@ -275,7 +275,7 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn"><i class="fas fa-fw fa-shopping-cart"></i> Buy</button>
+                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i class="fas fa-fw fa-shopping-cart"></i> Buy</button>
                   </div>
                 </div>
               </form>
@@ -338,7 +338,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn"><i class="fas fa-fw fa-gavel"></i> Sell</button>
+                    <button type="submit" class="btn" [disabled]="sellingFormDisabled"><i class="fas fa-fw fa-gavel"></i> Sell</button>
                   </div>
                 </div>
               </form>
@@ -401,7 +401,7 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn"><i class="fas fa-fw fa-gavel"></i> Create purchase offer</button>
+                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i class="fas fa-fw fa-gavel"></i> Create purchase offer</button>
                   </div>
                 </div>
               </form>
