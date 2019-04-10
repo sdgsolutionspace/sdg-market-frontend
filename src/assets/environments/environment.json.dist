@@ -1,3 +1,39 @@
+# This file is a "template" of which env vars need to be defined for your application
+# Copy this file to .env file for development, create environment variables when deploying to production
+# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+
+###> symfony/framework-bundle ###
+APP_ENV=dev
+APP_SECRET=0ab086de4a72fc51e21c753a628576fb
+#TRUSTED_PROXIES=127.0.0.1,127.0.0.2
+#TRUSTED_HOSTS=localhost,example.com
+###< symfony/framework-bundle ###
+
+###> doctrine/doctrine-bundle ###
+# Format described at http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url
+# For an SQLite database, use: "sqlite:///%kernel.project_dir%/var/data.db"
+# Configure your db driver and server_version in config/packages/doctrine.yaml
+DATABASE_URL=mysql://root:Pika1998@127.0.0.1:3306/sdg_market
+###< doctrine/doctrine-bundle ###
+
+###> GuzzleHttp ###
+BASE_URI=http://127.0.0.1:8000/api/v1/
+###> nelmio/cors-bundle ###
+CORS_ALLOW_ORIGIN=^https?://localhost(:[0-9]+)?$
+###< nelmio/cors-bundle ###
+
+OAUTH_GITHUB_CLIENT_ID=Iv1.3d07ca14f114255d
+OAUTH_GITHUB_CLIENT_SECRET=82035a47da488a6d4afd3cfea9bd0e5471efe0aa
+
+GITHUB_PARSER_LOGIN=Sofia-Pika
+GITHUB_PARSER_PASSWORD=Pika201798
+
+###> lexik/jwt-authentication-bundle ###
+JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
+JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
+JWT_PASSPHRASE=
+###< lexik/jwt-authentication-bundle ###
+
 {
     "production": true,
     "baseUrl": "",
