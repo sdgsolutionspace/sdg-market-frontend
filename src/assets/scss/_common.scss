@@ -31,6 +31,7 @@ header {
   }
 }
 
+
 main {
   &.page-main-content {
     flex-grow: 1;
@@ -38,7 +39,7 @@ main {
     padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
-
+    marging-left: 30px;
     aside {
       &.sidebar {
         nav {
