@@ -3,35 +3,37 @@
     <app-sidebar></app-sidebar>
     <div class="col-12 col-md-8 col-lg-10">
       <h1 class="title">
-        {{ currentProject?.name|titlecase }}'s project auction
+        {{ currentProject?.name|titlecase }}'s project status
       </h1>
 
       <ul class="nav nav-tabs" id="auction-tabs" role="tablist">
         <li class="nav-item">
           <a class="nav-link" [class.active]="selectedTab == 1" id="contribution-hstory-tab" data-toggle="tab"
             data-target="#contribution-history" role="tab" aria-controls="contribution-history" aria-selected="true"
-            target="_self" (click)="selectedTab = 1;">Contribution
+            target="_self" (click)="selectedTab = 1;">Transaction
             history</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedTab == 2" id="selling-offers-tab" data-toggle="tab" data-target="#selling-offers"
-            role="tab" aria-controls="selling-offers" aria-selected="false" target="_self" (click)="selectedTab = 2;">Selling
+          <a class="nav-link" [class.active]="selectedTab == 2" id="selling-offers-tab" data-toggle="tab"
+            data-target="#selling-offers" role="tab" aria-controls="selling-offers" aria-selected="false" target="_self"
+            (click)="selectedTab = 2;">Selling
             offers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="selectedTab == 3" id="buying-offers-tab" data-toggle="tab" data-target="#buying-offers"
-            role="tab" aria-controls="buying-offers" aria-selected="false" target="_self" (click)="selectedTab = 3;">Buying
+          <a class="nav-link" [class.active]="selectedTab == 3" id="buying-offers-tab" data-toggle="tab"
+            data-target="#buying-offers" role="tab" aria-controls="buying-offers" aria-selected="false" target="_self"
+            (click)="selectedTab = 3;">Buying
             offers</a>
         </li>
       </ul>
       <div class="tab-content" id="auction-tab-content">
-        <div class="tab-pane fade" [class.show]="selectedTab == 1" [class.active]="selectedTab == 1" id="contribution-history"
-          role="tabpanel" aria-labelledby="contribution-history-tab">
-          <h3>Contributions</h3>
+        <div class="tab-pane fade" [class.show]="selectedTab == 1" [class.active]="selectedTab == 1"
+          id="contribution-history" role="tabpanel" aria-labelledby="contribution-history-tab">
+          <h3>Transactions</h3>
           <div class="table-responsive">
             <app-table-contributions [git-project]="currentProject"></app-table-contributions>
           </div>
-          <nav aria-label="Projects navigation">
+          <!-- <nav aria-label="Projects navigation">
             <ul class="pagination justify-content-center">
               <li class="page-item disabled">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -53,7 +55,7 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </nav> -->
         </div>
         <div class="tab-pane fade" [class.show]="selectedTab == 2" [class.active]="selectedTab == 2" id="selling-offers"
           role="tabpanel" aria-labelledby="selling-offers-tab">
@@ -64,9 +66,7 @@
                 <tr>
                   <th>User</th>
                   <th>Token offered</th>
-                  <th>Date</th>
                   <th>Price (sdg)/token</th>
-                  <th>Expire</th>
                   <th class="actions">Action</th>
                 </tr>
               </thead>
@@ -84,19 +84,14 @@
                     {{ sale.remaining_tokens }} / {{ sale.number_of_tokens }} <i class="fas fa-fw fa-coins"></i>
                   </td>
                   <td>
-                    {{ sale.offer_starts_utc_date }}
-                  </td>
-                  <td>
                     <span class="badge badge-warning">
                       <i class="fas fa-fw fa-money-bill"></i>
                       {{ sale.sell_price_per_token | number : "1.2-4" }} SDG
                     </span>
                   </td>
-                  <td>
-                    {{ sale.offer_expires_at_utc_date }}
-                  </td>
                   <td class="actions">
-                    <a class="btn btn-dark" data-toggle="modal" (click)="buyTokens(buyModalForm, sale)" aria-controls="buy-modal">
+                    <a class="btn btn-dark" data-toggle="modal" (click)="buyTokens(buyModalForm, sale)"
+                      aria-controls="buy-modal">
                       <i class="fas fa-fw fa-shopping-cart"></i> Buy
                     </a>
                   </td>
@@ -108,7 +103,8 @@
 
                   </th>
                   <th>
-                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal" aria-controls="new-offer-modal">
+                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal"
+                      aria-controls="new-offer-modal">
                       <i class="fas fa-fw fa-gavel"></i> New offer
                     </a>
                   </th>
@@ -117,7 +113,7 @@
             </table>
 
           </div>
-          <nav aria-label="Projects navigation">
+          <!-- <nav aria-label="Projects navigation">
             <ul class="pagination justify-content-center">
               <li class="page-item disabled">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -139,7 +135,7 @@
                 </a>
               </li>
             </ul>
-          </nav>
+          </nav>-->
         </div>
         <div class="tab-pane fade" [class.show]="selectedTab == 3" [class.active]="selectedTab == 3" id="buying-offers"
           role="tabpanel" aria-labelledby="buying-offers-tab">
@@ -152,7 +148,6 @@
                   <th>Number of tokens to buy</th>
                   <th>Proposed amount / token</th>
                   <th>Date</th>
-                  <th>Expire</th>
                   <th class="actions">Action</th>
                 </tr>
               </thead>
@@ -173,14 +168,12 @@
                     {{ offer.purchase_price_per_token }} <i class="fas fa-fw fa-coins"></i>
                   </td>
                   <td>
-                    {{ offer.offer_starts_utc_date }}
-                  </td>
-                  <td>
-                    {{ offer.offer_expires_at_utc_date }}
+                    {{ offer.offer_starts_utc_date| date: 'mediumDate' }}
                   </td>
                   <td class="actions">
-                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal" aria-controls="new-offer-modal">
-                      <i class="fas fa-fw fa-coins"></i> Sell to this price
+                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal"
+                      aria-controls="new-offer-modal">
+                      <i class="fas fa-fw fa-shopping-cart"></i> Sell
                     </a>
                   </td>
                 </tr>
@@ -191,7 +184,8 @@
 
                   </th>
                   <th>
-                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-purchase-offer-modal" aria-controls="new-purchase-offer-modal">
+                    <a class="btn btn-dark" data-toggle="modal" data-target="#new-purchase-offer-modal"
+                      aria-controls="new-purchase-offer-modal">
                       <i class="fas fa-fw fa-gavel"></i> New purchase offer
                     </a>
                   </th>
@@ -200,29 +194,29 @@
             </table>
 
           </div>
-          <nav aria-label="Projects navigation">
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">
-                    <i class="fas fa-fw fa-caret-left"></i>
-                  </span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">
-                    <i class="fas fa-fw fa-caret-right"></i>
-                  </span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <!-- <nav aria-label="Projects navigation">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">
+                            <i class="fas fa-fw fa-caret-left"></i>
+                          </span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+                      <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">
+                            <i class="fas fa-fw fa-caret-right"></i>
+                          </span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav> -->
         </div>
       </div>
 
@@ -244,8 +238,9 @@
                   </label>
                   <div class="col-sm-5">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="number-of-tokens" placeholder="Tokens" min="1" step="1"
-                        formControlName="nb_tokens" (input)="onNbOfTokensToBuyChange($event.target.value, totalPrice)">
+                      <input type="number" class="form-control" id="number-of-tokens" placeholder="Tokens" min="1"
+                        step="1" formControlName="nb_tokens"
+                        (input)="onNbOfTokensToBuyChange($event.target.value, totalPrice)">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -275,7 +270,8 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i class="fas fa-fw fa-shopping-cart"></i> Buy</button>
+                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i
+                        class="fas fa-fw fa-shopping-cart"></i> Buy</button>
                   </div>
                 </div>
               </form>
@@ -303,8 +299,9 @@
                   </label>
                   <div class="col-sm-5">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="number-of-tokens-to-sell" placeholder="Tokens" min="1"
-                        step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('number_of_tokens').errors }">
+                      <input type="number" class="form-control" id="number-of-tokens-to-sell" placeholder="Tokens"
+                        min="1" step="1" formControlName="number_of_tokens"
+                        [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('number_of_tokens').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -322,8 +319,9 @@
                   </label>
                   <div class="col-sm-5">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1" step="1"
-                        formControlName="sell_price_per_token" [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('sell_price_per_token').errors }">
+                      <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1"
+                        step="1" formControlName="sell_price_per_token"
+                        [ngClass]="{ 'is-invalid': sellFormSubmitted && sellForm.get('sell_price_per_token').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-money-bill"></i>
@@ -338,7 +336,8 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn" [disabled]="sellingFormDisabled"><i class="fas fa-fw fa-gavel"></i> Sell</button>
+                    <button type="submit" class="btn" [disabled]="sellingFormDisabled"><i
+                        class="fas fa-fw fa-gavel"></i> Sell</button>
                   </div>
                 </div>
               </form>
@@ -348,18 +347,20 @@
       </div>
 
       <!-- New purchase offer-->
-      <div class="modal fade" id="new-purchase-offer-modal" tabindex="-1" role="dialog" aria-labelledby="new-purchase-offer-modal-title"
-        aria-hidden="true">
+      <div class="modal fade" id="new-purchase-offer-modal" tabindex="-1" role="dialog"
+        aria-labelledby="new-purchase-offer-modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="new-purchase-offer-modal-title">Purchase offer</h5>
-              <button #purchaseOfferModalCloseButton type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button #purchaseOfferModalCloseButton type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
                 <span aria-hidden="true"><i class="fas fa-fw fa-times"></i></span>
               </button>
             </div>
             <div class="modal-body">
-              <form [formGroup]="purchaseOfferForm" (ngSubmit)="submitPurchaseOfferForm()" [ngClass]="{'submitted': purchaseOfferFormSubmitted}">
+              <form [formGroup]="purchaseOfferForm" (ngSubmit)="submitPurchaseOfferForm()"
+                [ngClass]="{'submitted': purchaseOfferFormSubmitted}">
                 <div class="form-group row">
                   <label class="col-sm-7" for="number-of-tokens-to-purchase">
                     Number of tokens to purchase
@@ -367,7 +368,8 @@
                   <div class="col-sm-5">
                     <div class="input-group">
                       <input type="number" class="form-control" id="number-of-tokens-to-purchase" placeholder="Tokens"
-                        min="1" step="1" formControlName="number_of_tokens" [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('number_of_tokens').errors }">
+                        min="1" step="1" formControlName="number_of_tokens"
+                        [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('number_of_tokens').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-coins"></i>
@@ -385,8 +387,9 @@
                   </label>
                   <div class="col-sm-5">
                     <div class="input-group">
-                      <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1" step="1"
-                        formControlName="purchase_price_per_token" [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('purchase_price_per_token').errors }">
+                      <input type="number" class="form-control" id="price-per-token" placeholder="Tokens" min="1"
+                        step="1" formControlName="purchase_price_per_token"
+                        [ngClass]="{ 'is-invalid': purchaseOfferFormSubmitted && purchaseOfferForm.get('purchase_price_per_token').errors }">
                       <div class="input-group-append">
                         <span class="input-group-text">
                           <i class="fas fa-fw fa-money-bill"></i>
@@ -401,7 +404,8 @@
 
                 <div class="form-group row">
                   <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i class="fas fa-fw fa-gavel"></i> Create purchase offer</button>
+                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i class="fas fa-fw fa-gavel"></i>
+                      Create purchase offer</button>
                   </div>
                 </div>
               </form>

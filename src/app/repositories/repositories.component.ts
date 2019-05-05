@@ -10,7 +10,7 @@ import 'bootbox';
 })
 export class RepositoriesComponent implements OnInit {
 
-  title = 'GitHub Trading';
+  title = 'Developers Market';
 
   public projects: Array<GitProject> = null;
 

@@ -3,22 +3,26 @@
     <tr>
       <th>Date</th>
       <th *ngIf="!currentProject">Project</th>
+      <th *ngIf="currentProject">User</th>
       <th>Commit</th>
-      <th>Value</th>
+      <th>Token generated</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let contribution of currentContributions">
+    <tr *ngFor="let contribution of currentTransactions">
       <td>
-        {{ contribution.calculation_utc_datetime }}
+        {{ contribution.offer_starts_utc_date| date: 'mediumDate'}}
       </td>
 
       <td *ngIf="!currentProject">
         {{ contribution.git_project.name }}
       </td>
+      <td *ngIf="currentProject">
+        {{ contribution.User.name}}
+      </td>
       <td>
         <a href="{{ contribution.git_project.git_address }}/commit/{{ contribution.commit_id }}">
-          #{{ contribution.commit_id }}
+          #{{ contribution.commit_id | slice:0:8 }}
         </a>
       </td>
       <td>

@@ -18,7 +18,7 @@ import { AuthService } from "src/app/auth/auth.service";
   styleUrls: ["./project-auction.component.scss"]
 })
 export class ProjectAuctionComponent implements OnInit {
-  title = "GitHub Trading";
+  title = "Developers Market";
   selectedTab = 1;
   public sellForm: FormGroup;
   public purchaseOfferForm: FormGroup;
@@ -49,11 +49,11 @@ export class ProjectAuctionComponent implements OnInit {
     private purchaseOfferApi: ApiPurchaseOfferService,
     public toastr: ToastrService,
     public router: Router,
-    private projecApi: GitProjectApiService,
+    private projectApi: GitProjectApiService,
     private sellApi: ApiSellOfferService,
     private modalService: NgbModal,
     private authService: AuthService
-  ) {}
+  ) { }
 
   private generateSellingForm() {
     this.sellFormSubmitted = false;
@@ -85,7 +85,7 @@ export class ProjectAuctionComponent implements OnInit {
   ngOnInit() {
     this.projectId = this.route.snapshot.params["id"];
 
-    this.projecApi
+    this.projectApi
       .get(this.projectId)
       .toPromise()
       .then(project => {
