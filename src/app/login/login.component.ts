@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
-@Component( {
+@Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.scss' ]
-} )
+  styleUrls: ['./login.component.scss']
+})
 export class LoginComponent implements OnInit {
 
-  title = 'GitHub Trading';
+  title = 'Developers Market';
 
-  constructor( private router: Router, public auth: AuthService ) {
+  constructor(private router: Router, public auth: AuthService) {
   }
 
   ngOnInit() {
