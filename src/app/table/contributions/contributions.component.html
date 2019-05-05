@@ -3,6 +3,7 @@
     <tr>
       <th>Date</th>
       <th *ngIf="!currentProject">Project</th>
+      <th *ngIf="currentProject">User</th>
       <th>Commit</th>
       <th>Token generated</th>
     </tr>
@@ -16,9 +17,12 @@
       <td *ngIf="!currentProject">
         {{ contribution.git_project.name }}
       </td>
+      <td *ngIf="currentProject">
+        {{ contribution.User.name}}
+      </td>
       <td>
         <a href="{{ contribution.git_project.git_address }}/commit/{{ contribution.commit_id }}">
-          #{{ contribution.commit_id | limitTo: 8 }}
+          #{{ contribution.commit_id | slice:0:8 }}
         </a>
       </td>
       <td>
