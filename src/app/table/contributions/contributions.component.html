@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let contribution of currentTransactions">
+    <tr *ngFor="let contribution of currentContributions">
       <td>
         {{ contribution.offer_starts_utc_date| date: 'mediumDate'}}
       </td>
@@ -18,7 +18,7 @@
         {{ contribution.git_project.name }}
       </td>
       <td *ngIf="currentProject">
-        {{ contribution.User.name}}
+        {{ contribution.User }}
       </td>
       <td>
         <a href="{{ contribution.git_project.git_address }}/commit/{{ contribution.commit_id }}">
