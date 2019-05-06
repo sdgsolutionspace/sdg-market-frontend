@@ -9,7 +9,7 @@ import { GitProject } from '../interfaces/git-project';
 })
 export class AuctionsComponent implements OnInit {
 
-  title = 'GitHub Trading';
+  title = 'Developers Market';
   public projects: Array<GitProject> = null;
 
   constructor(private projectsApi: GitProjectApiService) {

@@ -14,24 +14,22 @@
           aria-controls="header-navigation" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="header-navigation">
+        <div class="collapse navbar-collapse flaot-left" id="header-navigation">
           <ul class="navbar-nav ml-auto">
-            <li classe="nav-item">
-              <a href="http://blog.developers.market/" class="btn btn-primary" role="button">Our
+            <li classe="nav-item float-right">
+              <a href="http://blog.developers.market/" class="nav-link" role="button">Our
                 Blog</a>
             </li>
             <li>
-              <a class="btn btn-primary float-right" [routerLink]="['/repositories/add']"
-                [routerLinkActive]="['active']" *ngIf="currentUser">
-                <i class="fas fa-fw fa-plus"></i> Add project
-              </a>
+              <a class="nav-link" [routerLink]="['/repositories/add']" [routerLinkActive]="['active']">
+                <i class="nav-item fas fa-fw fa-plus"></i>Add project</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/logout']" *ngIf="currentUser">Log out
                 [{{ currentUser.username }}]</a>
-              <a class="nav-link btn btn-primary" [routerLink]="['/login']" *ngIf="!currentUser">Login</a>
+              <a class="nav-link" [routerLink]="['/login']" *ngIf="!currentUser">Login</a>
             </li>
-            <li class="nav-item" *ngIf="currentUser">
+            <li class="nav-link" *ngIf="currentUser">
               <a href="javascript:;" class="nav-link">
                 <span class="badge badge-warning">
                   <i class="fas fa-fw fa-money-bill"></i>
