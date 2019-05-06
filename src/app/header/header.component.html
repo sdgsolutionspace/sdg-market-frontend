@@ -16,15 +16,13 @@
         </button>
         <div class="collapse navbar-collapse flaot-left" id="header-navigation">
           <ul class="navbar-nav ml-auto">
-            <li classe="nav-item">
+            <li classe="nav-item float-right">
               <a href="http://blog.developers.market/" class="nav-link" role="button">Our
                 Blog</a>
             </li>
             <li>
-              <a class="nav-item" [routerLink]="['/repositories/add']" [routerLinkActive]="['active']"
-                *ngIf="currentUser">
-                <i class="nav-link fas fa-fw fa-plus"></i> Add project
-              </a>
+              <a class="nav-link" [routerLink]="['/repositories/add']" [routerLinkActive]="['active']">
+                <i class="nav-item fas fa-fw fa-plus"></i>Add project</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/logout']" *ngIf="currentUser">Log out
