@@ -33,16 +33,16 @@
         </li>
       </ul>
       <div class="tab-content" id="auction-tab-content">
-        <div class="tab-pane fade" [class.show]="selectedTab == 0" [class.active]="selectedTab == 0" id="transaction-history"
-          role="tabpanel" aria-labelledby="transaction-history-tab">
+        <div class="tab-pane fade" [class.show]="selectedTab == 0" [class.active]="selectedTab == 0"
+          id="transaction-history" role="tabpanel" aria-labelledby="transaction-history-tab">
           <h3>Transactions</h3>
           <div class="table-responsive">
             <app-table-transactions [git-project]="currentProject"></app-table-transactions>
           </div>
         </div>
 
-        <div class="tab-pane fade" [class.show]="selectedTab == 1" [class.active]="selectedTab == 1" id="contribution-history"
-          role="tabpanel" aria-labelledby="contribution-history-tab">
+        <div class="tab-pane fade" [class.show]="selectedTab == 1" [class.active]="selectedTab == 1"
+          id="contribution-history" role="tabpanel" aria-labelledby="contribution-history-tab">
           <h3>Contributions</h3>
           <div class="table-responsive">
             <app-table-contributions [git-project]="currentProject"></app-table-contributions>

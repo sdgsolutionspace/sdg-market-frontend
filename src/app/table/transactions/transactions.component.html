@@ -27,7 +27,7 @@
       </td>
 
       <td>
-         <a target="_blank" href="https://github.com/{{ transaction.to_user?.username }}">
+        <a target="_blank" href="https://github.com/{{ transaction.to_user?.username }}">
           {{ transaction.to_user?.name || transaction.to_user?.username }}
         </a>
       </td>
@@ -44,7 +44,8 @@
         </span>
       </td>
       <td>
-         {{ (currentTransactions[0].nb_sdg - transaction.nb_sdg || currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
+        {{ (transaction.nb_sdg || currentTransactions[0].nb_sdg) - currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
+        &#37;
       </td>
     </tr>
   </tbody>
