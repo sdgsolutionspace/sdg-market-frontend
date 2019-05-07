@@ -18,8 +18,10 @@ import { AuthService } from "src/app/auth/auth.service";
   styleUrls: ["./project-auction.component.scss"]
 })
 export class ProjectAuctionComponent implements OnInit {
+
   title = "Developers Market";
   selectedTab = 1;
+
   public sellForm: FormGroup;
   public purchaseOfferForm: FormGroup;
   public buyForm: FormGroup;
