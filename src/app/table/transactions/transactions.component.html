@@ -44,7 +44,7 @@
         </span>
       </td>
       <td>
-         {{ (currentTransactions[0].nb_sdg - transaction.nb_sdg || currentTransactions[0].nb_sdg)/(transaction.nb_sdg? || 1) }}
+         {{ (currentTransactions[0].nb_sdg - transaction.nb_sdg || currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
       </td>
     </tr>
   </tbody>
