@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserShowComponent } from './user-show/user-show.component';
 import { ContributionsComponent } from './table/contributions/contributions.component';
+import { TransactionsComponent } from './table/transactions/transactions.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -41,6 +42,7 @@ import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         LoadingComponent,
         UserShowComponent,
         ContributionsComponent,
+        TransactionsComponent,
         HeaderComponent,
         FooterComponent,
         LogoutComponent

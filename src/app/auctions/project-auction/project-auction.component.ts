@@ -19,7 +19,7 @@ import { AuthService } from "src/app/auth/auth.service";
 })
 export class ProjectAuctionComponent implements OnInit {
   title = "Developers Market";
-  selectedTab = 1;
+  selectedTab = 0;
   public sellForm: FormGroup;
   public purchaseOfferForm: FormGroup;
   public buyForm: FormGroup;
