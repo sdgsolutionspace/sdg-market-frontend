@@ -4,6 +4,7 @@ import { GitProject } from 'src/app/interfaces/git-project';
 import { User } from 'src/app/interfaces/user';
 import { ApiTransactionService } from '../../services/api/api-transaction.service';
 import { Transaction } from 'src/app/interfaces/transaction';
+import {getPreviousOrParentNode} from "@angular/core/src/render3/instructions";
 
 @Component({
   selector: 'app-table-transactions',
@@ -34,6 +35,17 @@ export class TransactionsComponent implements OnInit {
         this.currentTransactions = transactions;
       });
     }
+  }
+
+  public getPreviousValue(id: number) {
+    if (id !== 0) {
+      if (id !== 0 && this.currentTransactions[id - 1].nb_sdg !== 0) {
+        return this.currentTransactions[id - 1].nb_sdg / this.currentTransactions[id - 1].nb_tokens;
+      } else {
+        return this.getPreviousValue(id - 1);
+      }
+    }
+    return this.currentTransactions[id].nb_sdg / this.currentTransactions[id].nb_tokens;
   }
 
 }
