@@ -4,7 +4,6 @@ import { GitProject } from 'src/app/interfaces/git-project';
 import { User } from 'src/app/interfaces/user';
 import { ApiTransactionService } from '../../services/api/api-transaction.service';
 import { Transaction } from 'src/app/interfaces/transaction';
-import {getPreviousOrParentNode} from "@angular/core/src/render3/instructions";
 
 @Component({
   selector: 'app-table-transactions',
