@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BackendApiService } from './backend-api.service';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/interfaces/user';
+import { Injectable } from "@angular/core";
+import { BackendApiService } from "./backend-api.service";
+import { Observable } from "rxjs";
+import { User } from "src/app/interfaces/user";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ApiUserService {
-
-  constructor(private backendApi: BackendApiService) { }
+  constructor(private backendApi: BackendApiService) {}
 
   public getAll(): Observable<Array<User>> {
     return this.backendApi.get("users");
@@ -31,6 +30,14 @@ export class ApiUserService {
   }
 
   public getMe() {
-    return this.backendApi.get('user/me');
+    return this.backendApi.get("user/me");
+  }
+
+  public demote(username) {
+    return this.backendApi.patch(`user/${username}/demote`, {});
+  }
+
+  public promote(username) {
+    return this.backendApi.patch(`user/${username}/promote`, {});
   }
 }

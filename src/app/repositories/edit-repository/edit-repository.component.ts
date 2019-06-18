@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class EditRepositoryComponent implements OnInit {
 
-  public title = 'GitHub Trading';
+  public title = 'Developers Market';
   public project: GitProject;
   public form: FormGroup;
   public loading = false;
