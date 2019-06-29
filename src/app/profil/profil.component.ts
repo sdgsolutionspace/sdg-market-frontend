@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from '../auth/auth.guard';
-import { User } from '../interfaces/user';
+import { User } from "../interfaces/user";
 import { AuthService } from '../auth/auth.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  selector: 'app-profil',
+  templateUrl: './profil.component.html',
+  styleUrls: ['./profil.component.scss']
 })
-export class SidebarComponent implements OnInit {
-
+export class ProfilComponent implements OnInit {
   public currentUser: User;
 
-  constructor(public authGuard: AuthGuard, public authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.currentUser = localStorage.getItem("CURRENT_USER") ? JSON.parse(localStorage.getItem("CURRENT_USER")) : null;
