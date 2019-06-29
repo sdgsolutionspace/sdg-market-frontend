@@ -41,7 +41,7 @@
       <th>
         <i class="fas fa-fw fa-coins"></i>
         {{ (contributionsSum() || 0) |number : '1.2-4' }}
-        (owned: {{ (currentProject?.own_value || 0) | number: '1.2-4'}})
+        (Generated: {{ (currentProject?.own_value || 0) | number: '1.2-4'}})
       </th>
     </tr>
   </tfoot>

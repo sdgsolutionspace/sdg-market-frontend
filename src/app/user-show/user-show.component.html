@@ -1,6 +1,6 @@
 <main class="container-fluid page-main-content">
   <div class="row align-items-stretch">
-    <app-sidebar></app-sidebar>
+
     <div class="col-12 col-md-8 col-lg-10">
       <h1 class="title" *ngIf="user">{{ user.username }}'s profile</h1>
 
@@ -23,22 +23,14 @@
               <label>Role</label>
               <div *ngIf="user.roles && user.roles.includes('ROLE_ADMIN')">
                 <span class="badge badge-danger">Admin</span><br />
-                <button
-                  class="btn btn-primary"
-                  [disabled]="actionPending"
-                  (click)="demote()"
-                >
+                <button class="btn btn-primary" [disabled]="actionPending" (click)="demote()">
                   Demote
                 </button>
               </div>
 
               <div *ngIf="!(user.roles && user.roles.includes('ROLE_ADMIN'))">
                 <span class="badge badge-success">Standard</span><br />
-                <button
-                  class="btn btn-primary"
-                  [disabled]="actionPending"
-                  (click)="promote()"
-                >
+                <button class="btn btn-primary" [disabled]="actionPending" (click)="promote()">
                   Promote
                 </button>
               </div>
@@ -48,11 +40,8 @@
 
         <div class="row">
           <div class="col-md-12">
-            <a
-              class="btn btn-block btn-outline-primary"
-              href="https://github.com/{{ user.username }}"
-              target="_blank"
-              ><i class="fab fa-fw fa-github"></i> View profile on Github
+            <a class="btn btn-block btn-outline-primary" href="https://github.com/{{ user.username }}"
+              target="_blank"><i class="fab fa-fw fa-github"></i> View profile on Github
             </a>
           </div>
         </div>
