@@ -13,6 +13,9 @@ import { CallbackComponent } from './login/callback/callback.component';
 import { UsersComponent } from './users/users.component';
 import { UserShowComponent } from './user-show/user-show.component';
 import { LogoutComponent } from './logout/logout.component';
+import { ProfilComponent } from './profil/profil.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { GraphComponent } from './graph/graph.component';
 
 /**
  * Route constant
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'callback', component: CallbackComponent },
+  { path: 'profil', component: ProfilComponent },
+  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'graph', component: GraphComponent },
   { path: 'repositories', component: RepositoriesComponent, canActivate: [AuthGuard] },
   { path: 'repositories/add', component: AddRepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repositories/edit/:id', component: EditRepositoryComponent, canActivate: [AuthGuard] },
@@ -29,7 +35,7 @@ const routes: Routes = [
   { path: 'auctions/project/:id', component: ProjectAuctionComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { expectedRole: 'ROLE_ADMIN' } },
   { path: 'users/show/:username', component: UserShowComponent },
-  { path: '**', redirectTo: 'auctions' },
+  { path: '**', redirectTo: 'auctions' }
 ];
 
 /**

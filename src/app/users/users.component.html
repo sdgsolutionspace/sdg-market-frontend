@@ -1,6 +1,6 @@
 <main class="container-fluid page-main-content">
   <div class="row align-items-stretch">
-    <app-sidebar></app-sidebar>
+
     <div class="col-12 col-md-8 col-lg-10">
       <h1 class="title">
         Manage users
@@ -22,10 +22,7 @@
           <tbody>
             <tr *ngFor="let user of users">
               <td>
-                <a
-                  href="https://github.com/{{ user.username }}"
-                  target="_blank"
-                >
+                <a href="https://github.com/{{ user.username }}" target="_blank">
                   {{ user.username }}
                 </a>
               </td>
@@ -39,16 +36,9 @@
                 {{ user.timezone }}
               </td>
               <td>
-                <span
-                  *ngIf="user.roles && user.roles.includes('ROLE_ADMIN')"
-                  class="badge badge-danger"
-                  >Admin</span
-                >
-                <span
-                  *ngIf="!(user.roles && user.roles.includes('ROLE_ADMIN'))"
-                  class="badge badge-success"
-                  >Standard</span
-                >
+                <span *ngIf="user.roles && user.roles.includes('ROLE_ADMIN')" class="badge badge-danger">Admin</span>
+                <span *ngIf="!(user.roles && user.roles.includes('ROLE_ADMIN'))"
+                  class="badge badge-success">Standard</span>
               </td>
               <td>
                 {{ user.active }}
@@ -57,10 +47,7 @@
                 {{ user.black_listed }}
               </td>
               <td class="actions">
-                <a
-                  [routerLink]="['/users/show', user.username]"
-                  class="btn btn-sm btn-warning"
-                >
+                <a [routerLink]="['/users/show', user.username]" class="btn btn-sm btn-warning">
                   <i class="fas fa-fw fa-pencil-alt"></i> Display
                 </a>
                 <a href="#" class="btn btn-sm btn-danger">

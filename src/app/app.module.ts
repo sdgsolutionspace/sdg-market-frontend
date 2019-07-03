@@ -13,7 +13,6 @@ import { ProjectAuctionComponent } from './auctions/project-auction/project-auct
 import { CallbackComponent } from './login/callback/callback.component';
 import { UsersComponent } from './users/users.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -21,10 +20,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserShowComponent } from './user-show/user-show.component';
 import { ContributionsComponent } from './table/contributions/contributions.component';
+import { TransactionsComponent } from './table/transactions/transactions.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { ProfilComponent } from './profil/profil.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
     declarations: [
@@ -37,13 +40,16 @@ import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         ProjectAuctionComponent,
         UsersComponent,
         CallbackComponent,
-        SidebarComponent,
         LoadingComponent,
         UserShowComponent,
         ContributionsComponent,
+        TransactionsComponent,
         HeaderComponent,
         FooterComponent,
-        LogoutComponent
+        LogoutComponent,
+        PortfolioComponent,
+        ProfilComponent,
+        GraphComponent
     ],
     imports: [
         BrowserModule,

@@ -17,8 +17,24 @@
         <div class="collapse navbar-collapse flaot-left" id="header-navigation">
           <ul class="navbar-nav ml-auto">
             <li classe="nav-item float-right">
-              <a href="http://blog.developers.market/" class="nav-link" role="button">Our
-                Blog</a>
+              <a href="http://blog.developers.market/" class="nav-link" role="button">Blog</a>
+            </li>
+            <li class="nav-link">
+              <a class="nav-item" [routerLink]="['/auctions']" [routerLinkActive]="['active']">
+                Projects
+              </a>
+            </li>
+            <li class="nav-link">
+              <a class="nav-item active" [routerLink]="['/repositories']" [routerLinkActive]="['active']"
+                *ngIf="authGuard.hasTheRole(currentUser, 'ROLE_ADMIN')">Repositories
+              </a>
+            </li>
+            <li class="nav-link" *ngIf="authGuard.hasTheRole(currentUser, 'ROLE_ADMIN')">
+              <a class="nav-item" [routerLink]="['/users']" [routerLinkActive]="['active']">Manage users
+              </a>
+            </li>
+            <li class="nav-link">
+              <a classe="nav-item" [routerLink]="['/profil']" *ngIf="currentUser" role="button">Profil</a>
             </li>
             <li>
               <a class="nav-link" [routerLink]="['/repositories/add']" [routerLinkActive]="['active']">
