@@ -1,4 +1,26 @@
-<div class="form-group">
-  <label>The profil of</label>
-  <p>{{ currentUser.username }}</p>
-</div>
+<main class="container-fluid page-main-content">
+  <div class="row align-items-stretch">
+    <div class="col-12 col-md-8 col-lg-10">
+      <h1 class="title">
+        {{ currentUser.username }}'s profile
+      </h1>
+      <h2> Activity </h2>
+      <div class="tab-content" id="auction-tab-content">
+        <div class="tab-pane fade" id="transaction-history" role="tabpanel" aria-labelledby="transaction-history-tab">
+          <h2>Transactions</h2>
+          <div class="table-responsive">
+            <app-table-transactions [git-project]="allTransaction"></app-table-transactions>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="auction-tab-content">
+        <div class="tab-pane fade" id="transaction-history" role="tabpanel" aria-labelledby="transaction-history-tab">
+          <h2>Contribution</h2>
+          <div class="table-responsive">
+            <app-table-transactions [git-project]="allContribution"></app-table-transactions>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
