@@ -14,6 +14,8 @@ ENV GITHUB_REDIRECT_URI=http://localhost/callback
 ## Non interactive Debian package installation
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+
 ## Let refresh first the Debian repo
 RUN apt-get update \
     && apt-get -y install wget \
