@@ -13,8 +13,8 @@ import { GitProject } from 'src/app/interfaces/git-project';
 })
 export class ProfilComponent implements OnInit {
   public currentUser: User;
-  public allTransaction: Transaction;
-  public allContribution: Contribution;
+  public allTransaction: Array<Transaction>;
+  public allContribution: Array<Contribution>;
   public currentProject: GitProject;
 
   constructor(private authService: AuthService, private transactionService: ApiTransactionService) { }
@@ -27,7 +27,8 @@ export class ProfilComponent implements OnInit {
     this.transactionService.getAll({
       project: this.currentProject ? this.currentProject.id : null).toPromise().then(transactions => {
         this.allTransaction = transactions;
-      });;
+      })
+      ;
 
   }
 }
