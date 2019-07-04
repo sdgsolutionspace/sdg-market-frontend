@@ -23,13 +23,12 @@ export class ProfilComponent implements OnInit {
     this.currentUser = localStorage.getItem("CURRENT_USER") ? JSON.parse(localStorage.getItem("CURRENT_USER")) : null;
     this.authService.authenticationEvent.subscribe(user => {
       this.currentUser = user;
-    })
+    });
     this.transactionService.getAll({
-      project: this.currentProject ? this.currentProject.id : null).toPromise().then(transactions => {
-        this.allTransaction = transactions;
-      })
-      ;
-
+      from_user: this.currentUser.id
+    }).toPromise().then(transactions => {
+      this.allTransaction = transactions;
+    });
   }
 }
 
