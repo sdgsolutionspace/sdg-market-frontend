@@ -6,6 +6,8 @@ import { Transaction } from 'src/app/interfaces/transaction';
 import { Contribution } from '../interfaces/contribution';
 import { GitProject } from 'src/app/interfaces/git-project';
 
+
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -14,7 +16,7 @@ import { GitProject } from 'src/app/interfaces/git-project';
 export class ProfilComponent implements OnInit {
   public currentUser: User;
   public allTransaction: Array<Transaction>;
-  public allContribution: Array<Contribution>;
+  public allContribution: Array<Transaction>;
   public currentProject: GitProject;
 
   constructor(private authService: AuthService, private transactionService: ApiTransactionService) { }
@@ -28,6 +30,7 @@ export class ProfilComponent implements OnInit {
       from_user: this.currentUser.id
     }).toPromise().then(transactions => {
       this.allTransaction = transactions;
+      this.allContribution = transactions.filter(to_user => _ !== null);
     });
   }
 }
