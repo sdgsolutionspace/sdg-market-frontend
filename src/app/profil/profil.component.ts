@@ -30,7 +30,7 @@ export class ProfilComponent implements OnInit {
       from_user: this.currentUser.id
     }).toPromise().then(transactions => {
       this.allTransaction = transactions;
-      this.allContribution = transactions.filter(to_user => _ !== null);
+      this.allContribution = transactions.filter(to_user => to_user !== null);
     });
   }
 }
