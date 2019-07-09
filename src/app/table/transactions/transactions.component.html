@@ -7,7 +7,7 @@
       <th>Buyer</th>
       <th>Token</th>
       <th>Price per token</th>
-      <th>All time ROC</th>
+      <!-- <th>All time ROC</th> -->
     </tr>
   </thead>
   <tbody>
@@ -43,10 +43,10 @@
           {{ transaction.nb_sdg / transaction.nb_tokens }}
         </span>
       </td>
-      <td>
-        {{ ((transaction.nb_sdg / transaction.nb_tokens) - getPreviousValue(transaction.id))/(getPreviousValue(transaction.id) || 1)}}
+<!--       <td>
+        {{ (transaction.nb_sdg || currentTransactions[0].nb_sdg) - currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
         &#37;
-      </td>
+      </td> -->
     </tr>
   </tbody>
   <tfoot>
