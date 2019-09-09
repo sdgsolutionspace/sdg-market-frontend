@@ -1,5 +1,5 @@
-# responsive design for tables
-# This should be abstracted into its own component for order-book for now we take advantage of the fact that css gets overwritten in lower components
+//responsive design for tables
+//This should be abstracted into its own component for order-book for now we take advantage of the fact that css gets overwritten in lower components
 @media
 only screen and (max-width: 768px) {
 	td:nth-of-type(1):before { content: "Bid: " }
