@@ -38,13 +38,13 @@ export class TransactionsComponent implements OnInit {
 
   public getPreviousValue(id: number) {
     if (id !== 0) {
-      if (this.currentTransactions[id - 1].nb_sdg !== 0) {
+      if (this.currentTransactions[id - 1] && this.currentTransactions[id - 1].nb_sdg !== 0) {
         return this.currentTransactions[id - 1].nb_sdg / this.currentTransactions[id - 1].nb_tokens;
       } else {
         return this.getPreviousValue(id - 1);
       }
     }
-    return this.currentTransactions[id].nb_sdg / this.currentTransactions[id].nb_tokens;
+    return this.currentTransactions[id] ? this.currentTransactions[id].nb_sdg / this.currentTransactions[id].nb_tokens : null;
   }
 
 }

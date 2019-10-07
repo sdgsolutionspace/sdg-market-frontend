@@ -29,6 +29,7 @@ export class ApiSellOfferService {
   }
 
   public create(data: SellOffer): Observable<SellOffer> {
+    console.log("POSTING ", data);
     return this.backendApi.post(`sell-offers`, data);
   }
 

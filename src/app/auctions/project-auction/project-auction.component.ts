@@ -1,16 +1,16 @@
-import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ApiSellOfferService} from 'src/app/services/api/api-sell-offer.service';
-import {ToastrService} from 'ngx-toastr';
-import {SellOffer} from 'src/app/interfaces/sell-offer';
-import {ApiPurchaseOfferService} from 'src/app/services/api/api-purchase-offer.service';
-import {PurchaseOffer} from 'src/app/interfaces/purchase-offer';
-import {Contribution} from 'src/app/interfaces/contribution';
-import {GitProject} from 'src/app/interfaces/git-project';
-import {GitProjectApiService} from 'src/app/services/api/git-project-api.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AuthService} from 'src/app/auth/auth.service';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiSellOfferService } from 'src/app/services/api/api-sell-offer.service';
+import { ToastrService } from 'ngx-toastr';
+import { SellOffer } from 'src/app/interfaces/sell-offer';
+import { ApiPurchaseOfferService } from 'src/app/services/api/api-purchase-offer.service';
+import { PurchaseOffer } from 'src/app/interfaces/purchase-offer';
+import { Contribution } from 'src/app/interfaces/contribution';
+import { GitProject } from 'src/app/interfaces/git-project';
+import { GitProjectApiService } from 'src/app/services/api/git-project-api.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-project-auction',
@@ -21,11 +21,14 @@ export class ProjectAuctionComponent implements OnInit {
   title = 'Developers Market';
   selectedTab = 0;
   public sellForm: FormGroup;
+  public sellFormToExisting: FormGroup;
   public purchaseOfferForm: FormGroup;
   public buyForm: FormGroup;
 
   public projectId: number;
+  public selectedBid: number;
   public sellFormSubmitted = false;
+  public sellFormToExistingSubmitted = false;
   public purchaseOfferFormSubmitted = false;
   public buyFormSumitted = false;
   public currentSellFormBuying: SellOffer;
@@ -40,6 +43,7 @@ export class ProjectAuctionComponent implements OnInit {
   public sellingFormDisabled = false;
 
   @ViewChild('sellModalCloseButton') sellModalCloseButton: ElementRef;
+  @ViewChild('sellOfferToExistingModalCloseButton') sellOfferToExistingModalCloseButton: ElementRef;
   @ViewChild('purchaseOfferModalCloseButton')
   purchaseOfferModalCloseButton: ElementRef;
 
@@ -66,12 +70,11 @@ export class ProjectAuctionComponent implements OnInit {
     });
   }
 
-  private generateSellToExistingForm(buyForm: number) {
-    this.sellFormSubmitted = false;
-    this.sellForm = this.fb.group({
-        number_of_tokens: [0, [Validators.required]],
-        buy_offer: [buyForm, [Validators.required]]
-      });
+  private generateSellToExistingForm() {
+    this.sellFormToExistingSubmitted = false;
+    this.sellFormToExisting = this.fb.group({
+      nb_tokens: [0, [Validators.required]],
+    });
   }
 
   private generateBuyForm(sellForm: number) {
@@ -132,10 +135,15 @@ export class ProjectAuctionComponent implements OnInit {
     console.log('Buy Offer selected', buyOffer, modalForm);
     this.modalService.open(modalForm);
     this.currentBuyFormSelling = buyOffer;
-    this.generateSellToExistingForm(buyOffer.id);
+    this.selectedBid = buyOffer.id;
+    this.generateSellToExistingForm();
   }
 
   public closeBuyModalForm() {
+    this.modalService.dismissAll();
+  }
+
+  public closeSellToExistingModalForm() {
     this.modalService.dismissAll();
   }
 
@@ -164,6 +172,7 @@ export class ProjectAuctionComponent implements OnInit {
   ) {
     const totalPrice =
       nbOfTokens * parseFloat(this.currentBuyFormSelling.purchase_price_per_token);
+    totalPriceField.value = totalPrice.toFixed(2);
   }
 
   public submitSellForm() {
@@ -188,6 +197,41 @@ export class ProjectAuctionComponent implements OnInit {
         .catch(error => {
           console.log(error);
           this.toastr.error('An error occurred while saving your data', error);
+        })
+        .then(() => {
+          this.sellingFormDisabled = false;
+        });
+    }
+  }
+
+
+  public submitSellFormToExisting() {
+    const formValue = this.sellFormToExisting.value;
+
+    this.sellFormSubmitted = true;
+    if (this.sellForm.valid) {
+      this.sellingFormDisabled = true;
+      this.purchaseOfferApi
+        .sellToExistingBid(this.selectedBid, formValue)
+        .toPromise()
+        .then(data => {
+          this.modalService.dismissAll();
+          this.generateSellingForm();
+          this.refreshSellOffer();
+          console.log('success', data);
+          this.toastr.success(
+            'The data have been saved successfully',
+            'Data saved'
+          );
+        })
+        .catch(error => {
+          let errorMsg = "";
+          if (error.error.code == 400) {
+            for (let id in error.error.errors.children) {
+              errorMsg += `${id} : ${error.error.errors.children[id].errors.join(". ")}`
+            }
+          }
+          this.toastr.error(errorMsg ? errorMsg : 'Unknown error', 'An error occurred while saving your data');
         })
         .then(() => {
           this.sellingFormDisabled = false;

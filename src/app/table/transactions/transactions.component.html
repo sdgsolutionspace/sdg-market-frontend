@@ -44,7 +44,6 @@
         </span>
       </td>
       <td>
-        <!-- {{ (-(transaction.nb_sdg || currentTransactions[0].nb_sdg)) - (getPreviousValue(transaction.id))/(transaction.nb_sdg || 1) }} -->
         {{ (-(transaction.nb_sdg || currentTransactions[0].nb_sdg)) - (currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
         &#37;
       </td>

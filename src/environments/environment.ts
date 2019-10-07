@@ -8,7 +8,7 @@ export const environment = {
     baseAPIUrl: 'http://localhost:8000/api/v1/',
     githubAuth: {
         URL: 'https://github.com/login/oauth/authorize',
-        CLIENT_ID: 'Iv1.54319c9b16b131e3',
+        CLIENT_ID: 'Iv1.dfce0464dfd579c4',
         CLIENT_DOMAIN: 'github-trading.eu.auth0.com',
         REDIRECT_URI: 'http://localhost:4200/callback',
         SCOPE: 'user user:email repo'
