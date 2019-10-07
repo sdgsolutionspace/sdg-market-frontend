@@ -31,4 +31,8 @@ export class ApiPurchaseOfferService {
   public delete(id: number): Observable<any> {
     return this.backendApi.delete(`purchase-offers/${id}`);
   }
+
+  public sell(data): Observable<PurchaseOffer> {
+    return this.backendApi.update(`sell-offers/${data.buy_offer}/sell`, data);
+  }
 }

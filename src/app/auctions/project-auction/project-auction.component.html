@@ -98,12 +98,17 @@
                     @{{ offer.purchaser?.username }}
                   </a>
                 </td>
+                <!--<td class="actions">-->
+                  <!--<a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal"-->
+                     <!--aria-controls="new-offer-modal">-->
+                    <!--<i class="fas fa-fw fa-gavel"></i> Sell-->
+                  <!--</a>-->
                 <td class="actions">
-                  <a class="btn btn-dark" data-toggle="modal" data-target="#new-offer-modal"
-                     aria-controls="new-offer-modal">
+                  <a class="btn btn-dark" data-toggle="modal" (click)="sellToExisting(sellModalForm, offer)"
+                     aria-controls="sell-to-existing-modal">
                     <i class="fas fa-fw fa-gavel"></i> Sell
                   </a>
-                </td>
+
               </tr>
               </tbody>
               <tfoot>
@@ -254,6 +259,67 @@
           </div>
         </div>
       </div>
+
+      <!-- Sell to existing modal -->
+      <ng-template #sellModalForm>
+        <div class="" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sell-to-existing-modal-title">Sell To this price</h5>
+              <button #sellOfferModalCloseButton type="button" class="close" data-dismiss="modal" arial-label="Close">
+                <span aria-hidden="true"><i class="fas fa-fw fa-times"></i></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="sellForm" (ngSubmit)="submitSellForm()" [ngClass]="{'submitted': sellFormSubmitted}">
+                <div class="form-group row">
+                  <label class="col-sm-7" for="number-of-tokens-to-sell">
+                    Number of tokens to sell
+                  </label>
+                  <div class="col-sm-5">
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="number-of-tokens" placeholder="Tokens" min="1"
+                        step="1" formControlName="nb_tokens"
+                        (input)="onNbOfTokensToSellChange($event.target.value, totalPrice)">
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fas fa-fw fa-coins"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback" *ngIf="sellForm.get('nb_tokens').errors">
+                      {{ sellForm.get('nb_tokens').errors.nbTokens }}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-7" for="value-of-tokens">
+                    Total
+                  </label>
+                  <div class="col-sm-5">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="value-of-tokens" placeholder="Total" #totalPrice
+                        disabled>
+                      <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="fas fa-fw fa-money-bill"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn" [disabled]="buyingFormDisabled"><i
+                        class="fas fa-fw fa-shopping-cart"></i> Sell</button>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </ng-template>
 
       <!-- New purchase offer-->
       <div class="modal fade" id="new-purchase-offer-modal" tabindex="-1" role="dialog"
