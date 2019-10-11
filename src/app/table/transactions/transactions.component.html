@@ -7,7 +7,6 @@
       <th>Buyer</th>
       <th>Tokens</th>
       <th>Price per token</th>
-      <th>All time ROC</th>
     </tr>
   </thead>
   <tbody>
@@ -43,12 +42,6 @@
           {{ -transaction.nb_sdg / transaction.nb_tokens }}
         </span>
       </td>
-      <td>
-        {{ (-(transaction.nb_sdg || currentTransactions[0].nb_sdg)) - (currentTransactions[0].nb_sdg)/(transaction.nb_sdg || 1) }}
-        &#37;
-      </td>
-      <!--For debugging perpuses displayes the transaction number-->
-      <td>{{transaction.id}} previous : {{getPreviousValue(transaction.id)}}</td>
     </tr>
   </tbody>
   <tfoot>
